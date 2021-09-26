@@ -132,7 +132,7 @@
       success:function(res){        
       if(res){
         $("#district").empty();
- $("#district").append('<option>Select District</option>');
+        $("#district").append('<option>Select District</option>');
         $.each(res,function(key,value){
           $("#district").append('<option value="'+key+'">'+value+'</option>');
         });
@@ -156,7 +156,7 @@
       success:function(res){        
       if(res){
         $("#subdistrict").empty();
- $("#subdistrict").append('<option>Select SubDistrict</option>');
+        $("#subdistrict").append('<option>Select SubDistrict</option>');
         $.each(res,function(key,value){
           $("#subdistrict").append('<option value="'+key+'">'+value+'</option>');
         });
