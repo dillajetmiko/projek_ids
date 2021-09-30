@@ -24,7 +24,7 @@ class DropdownController extends Controller
             'menu' => 'MasterTambahData',
             'submenu' => 'tambahdata2',
         );
-        return view('dropdown',$data,compact('provinces'));
+        return view('dropdown2',$data,compact('provinces'));
     }
     
     public function getCity(Request $request)

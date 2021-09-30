@@ -2,7 +2,7 @@
 
 @section("page_title","IDS")
 
-@section("title","Blank Page")
+@section("title","Tambah Data")
 
 @section("custom_css")
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -20,14 +20,14 @@
 
 @section("breadcrumb")
 <li class="breadcrumb-item"><a href="#">Home</a></li>
-<li class="breadcrumb-item active">Blank Page</li>
+<li class="breadcrumb-item active">Tambah Data</li>
 @endsection
 
 @section("content")
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Title</h3>
+    <h3 class="card-title">Tambah Data Customer</h3>
 
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
