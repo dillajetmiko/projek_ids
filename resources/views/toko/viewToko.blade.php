@@ -2,7 +2,7 @@
 
 @section("page_title","IDS")
 
-@section("title","Customer")
+@section("title","Toko")
 
 @section("custom_css")
 <!-- DataTables -->
@@ -12,14 +12,14 @@
 
 @section("breadcrumb")
 <li class="breadcrumb-item"><a href="/">Home</a></li>
-<li class="breadcrumb-item active">Customer</li>
+<li class="breadcrumb-item active">Toko</li>
 @endsection
 
 @section("content")
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Data Customer</h3>
+    <h3 class="card-title">Data Toko</h3>
 
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -29,48 +29,54 @@
     </div>
   </div>
   <div class="card-body">
+    <div style="height: 70px;">
+      <a href="/toko/formToko">
+        <button type="button" class="btn btn-info float-right" style="float: right; margin: 5px"><i class="fas fa-plus"></i>  Tambah Data Lokasi Toko</button>
+      </a><br>
+    </div>
+    <div>
       <table id="example1" class="table table-bordered table-striped">
           <thead>
               <tr>
-                  <th>ID</th>
-                  <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>Kelurahan</th>
-                  <th>Foto</th>
+                  <th>Barcode</th>
+                  <th>Nama Toko</th>
+                  <th>Latitude</th>
+                  <th>Longitude</th>
+                  <th>Accuracy</th>
               </tr>
           </thead>
           <tbody>
-          @foreach($customer as $data)
+          @php
+              $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
+          @endphp
+          @foreach($lokasi_toko as $data)
               <tr>
-                  <td>{{ $data->id }}</td>
-                  <td>{{ $data->nama }}</td>
-                  <td>{{ $data->alamat }}</td>
-                  <td>{{ $data->subdis_id }}</td>
                   <td style="text-align:center">
-                    @if ($data->file_path !== null)
-                      <img src="{{url('/uploads/'.$data->file_path)}}" width="200" height="150" alt="Image"/>
-                      <!-- <img src="{{asset('/storage/app/uploads/'.$data->file_path)}}" width="200" height="150" alt="Image"/> -->
-                    @else
-                      <img src="{{$data->foto}}" width="200" height="150" alt="Image"/>
-                    @endif
+                    <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($data->barcode, $generatorPNG::TYPE_CODE_128)) }}"><br>
+                    {{ $data->barcode }}<br>
                   </td>
+                  <td>{{ $data->nama_toko }}</td>
+                  <td>{{ $data->latitude }}</td>
+                  <td>{{ $data->longitude }}</td>
+                  <td>{{ $data->accuracy }}</td>
               </tr>
           @endforeach
           </tbody>
           <tfoot>
               <tr>
-                  <th>ID</th>
-                  <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>Kelurahan</th>
-                  <th>Foto</th>
+                  <th>Barcode</th>
+                  <th>Nama Toko</th>
+                  <th>Latitude</th>
+                  <th>Longitude</th>
+                  <th>Accuracy</th>
               </tr>
           </tfoot>
       </table>
+    </div>
   </div>
   <!-- /.card-body -->
   <div class="card-footer">
-    Footer
+    
   </div>
   <!-- /.card-footer-->
 </div>

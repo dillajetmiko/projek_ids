@@ -2,7 +2,7 @@
 
 @section("page_title","IDS")
 
-@section("title","Blank Page")
+@section("title","Home")
 
 @section("custom_css")
 
@@ -10,7 +10,7 @@
 
 @section("breadcrumb")
 <li class="breadcrumb-item"><a href="#">Home</a></li>
-<li class="breadcrumb-item active">Blank Page</li>
+<li class="breadcrumb-item active">Home</li>
 @endsection
 
 @section("content")

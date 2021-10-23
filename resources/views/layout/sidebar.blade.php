@@ -14,14 +14,14 @@
   <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">  
       <li class="nav-item">
-        @if($menu == 'customer')
-        <a href="/customer" class="nav-link active">
+        @if($menu == 'Home')
+        <a href="/home" class="nav-link active">
         @else
-        <a href="/customer" class="nav-link">
+        <a href="/home" class="nav-link">
         @endif
-          <i class="nav-icon fas fa-users"></i>
+          <i class="nav-icon fas fa-home"></i>
           <p>
-            Customer
+            Home
           </p>
         </a>
       </li>
@@ -32,13 +32,23 @@
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
       @endif
-          <i class="nav-icon far fa-plus-square"></i>
+          <i class="nav-icon fas fa-users"></i>
           <p>
-            Tambah Data
+            Customer
             <i class="fas fa-angle-left right"></i>
           </p>
         </a>
         <ul class="nav nav-treeview">
+          <li class="nav-item">
+            @if($submenu == 'customer')
+            <a href="/customer" class="nav-link active">
+            @else
+            <a href="/customer" class="nav-link ">
+            @endif 
+              <i class="far fa-circle nav-icon"></i>
+              <p>Data Customer</p>
+            </a>
+          </li>
           <li class="nav-item">
             @if($submenu == 'tambahdata')
             <a href="/dropdown" class="nav-link active">
@@ -111,6 +121,31 @@
           </p>
         </a>
       </li>
+      <li class="nav-item">
+        @if($menu == 'geolocation')
+        <a href="/toko" class="nav-link active">
+        @else
+        <a href="/toko" class="nav-link">
+        @endif
+          <i class="nav-icon fas fa-map-marked-alt"></i>
+          <p>
+            Input Titik Awal
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        @if($menu == 'kunjungan')
+        <a href="/scannertoko" class="nav-link active">
+        @else
+        <a href="/scannertoko" class="nav-link">
+        @endif
+          <i class="nav-icon fas fa-street-view"></i>
+          <p>
+            Kunjungan Toko
+          </p>
+        </a>
+      </li>
+    
     </ul>
   </nav>
   <!-- /.sidebar-menu -->

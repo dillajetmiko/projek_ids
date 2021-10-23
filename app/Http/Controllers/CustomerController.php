@@ -12,12 +12,12 @@ class CustomerController extends Controller
     {
         $customer = DB::table('customer')->get();
         $data = array(
-            'menu' => 'customer',
+            'menu' => 'MasterTambahData',
             'customer' => $customer,
-            'submenu' => '',
+            'submenu' => 'customer',
         );
 
-        return view('viewCustomer',$data); 
+        return view('customer/viewCustomer',$data); 
     }
 
     public function simpan(Request $request)
