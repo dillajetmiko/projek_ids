@@ -2,7 +2,7 @@
 
 @section("page_title","IDS")
 
-@section("title","Scanner")
+@section("title","Kunjungan Toko")
 
 @section("custom_css")
 <!-- <link href="{{asset ('asset/scan/css/bootstrap.min.css')}}" rel="stylesheet"> -->
@@ -17,7 +17,7 @@
 
 @section("breadcrumb")
 <li class="breadcrumb-item"><a href="#">Home</a></li>
-<li class="breadcrumb-item active">Scanner</li>
+<li class="breadcrumb-item active">Kunjungan Toko</li>
 @endsection
 
 @section("content")
@@ -85,7 +85,7 @@
                         </div>
                         <div class="caption">
                             <h3>Scanned result</h3>
-                            <!-- <p id="scanned-QR"></p> -->
+                            <p id="scanned-QR"></p>
                         </div>
                     </div>
                 </div>
@@ -111,10 +111,10 @@
           <form method="post" action="/toko/tambahToko" enctype="multipart/form-data">
             <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
             <div class="container">
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="barcode">Barcode</label>
                 <textarea type="text" name="barcode" class="form-control" id="scanned-QR"></textarea>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="nama_toko">Nama Toko</label>
                 <input type="text" name="nama_toko" class="form-control" id="nama_toko" disabled>
@@ -139,16 +139,16 @@
     <!-- /.col-md-6 -->
 
     <div class="col-lg-6">
-    <div class="card card-primary card-outline">
+      <div class="card card-primary card-outline">
         <div class="card-header">
-        <h5 class="m-0">Titik Kunjungan</h5>
+          <h5 class="m-0">Titik Kunjungan</h5>
         </div>
         <div class="card-body">
-        <button class="btn btn-primary" onclick="getLocation()">Try It</button>
-        <p id="demo"></p>
-
+          <!-- <button class="btn btn-primary" onclick="getLocation()">Try It</button> -->
+          <p id="demo"></p>
+          <p id="demo2"></p>
         </div>
-    </div>
+      </div>
     </div>
     <!-- /.col-md-6 -->
 </div>
@@ -174,34 +174,75 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-$("#scanned-QR").mousemove(function(e){
-    // alert($(this).val());
-    var scanned = $(this).val();
-    $.ajax({
-        type: "GET",
-        url: "{{route('getAllFields')}}",
-        data: {'scanned':scanned},
-        dataType: 'json',
-        success : function(data) {
-            $('#nama_toko').val(data.nama_toko); 
-            $('#latitude').val(data.latitude); 
-            $('#longitude').val(data.longitude);
-            $('#accuracy').val(data.accuracy);
-        },
-        error: function(response) {
-            alert(response.responseJSON.message);
-        }
-    });
+
+$('#scanned-QR').bind('input propertychange', function() {
+  alert("hasil scan");
 });
+
+$("#scanned-QR").hover(function(e){
+// alert($(this).val());
+var scanned = $(this).val();
+$.ajax({
+    type: "GET",
+    url: "{{route('getAllFields')}}",
+    data: {'scanned':scanned},
+    dataType: 'json',
+    success : function(data) {
+        $('#nama_toko').val(data.nama_toko); 
+        $('#latitude').val(data.latitude); 
+        $('#longitude').val(data.longitude);
+        $('#accuracy').val(data.accuracy);
+    },
+    error: function(response) {
+        alert(response.responseJSON.message);
+    }
+  });
+});
+
+
+// $("#scanned-QR").hover(function(e){
+//     // alert($(this).val());
+//     var scanned = $(this).val();
+//     $.ajax({
+//         type: "GET",
+//         url: "{{route('getAllFields')}}",
+//         data: {'scanned':scanned},
+//         dataType: 'json',
+//         success : function(data) {
+//             $('#nama_toko').val(data.nama_toko); 
+//             $('#latitude').val(data.latitude); 
+//             $('#longitude').val(data.longitude);
+//             $('#accuracy').val(data.accuracy);
+//         },
+//         error: function(response) {
+//             alert(response.responseJSON.message);
+//         }
+//     });
+// });
 
 </script>
 
 <script>
 var x = document.getElementById("demo");
+var y = document.getElementById("demo2");
 
-function getLocation() {
+function getLocation(data) {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    // navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(position => {
+      x.innerHTML = "Latitude: " + position.coords.latitude + 
+      "<br>Longitude: " + position.coords.longitude +
+      "<br>Accuracy: " + position.coords.accuracy;
+      d = getDistanceFromLatLonInKm(data.latitude,data.longitude,position.coords.latitude,position.coords.longitude);
+      // d = 1749.649374864356;
+      let rataAcc = (data.accuracy + position.coords.accuracy)/2;
+      if(d <= rataAcc){
+        y.innerHTML = "Jarak antara titik awal dan titik kunjungan : " + d + "<br>Anda telah melakukan kunjungan";
+      }else{
+        alert("Anda tidak berada dalam toko\nJarak : " + d + "\nRata-rata Accuracy : " + rataAcc);
+      }
+    });
+
   } else { 
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
@@ -211,6 +252,43 @@ function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude + 
   "<br>Longitude: " + position.coords.longitude +
   "<br>Accuracy: " + position.coords.accuracy;
+}
+
+function hasilscan(code){
+  $.ajax({
+      type: "GET",
+      url: "{{route('getAllFields')}}",
+      data: {'scanned':code},
+      dataType: 'json',
+      success : function(data) {
+          $('#nama_toko').val(data.nama_toko); 
+          $('#latitude').val(data.latitude); 
+          $('#longitude').val(data.longitude);
+          $('#accuracy').val(data.accuracy);
+          getLocation(data);
+      },
+      error: function(response) {
+          alert(response.responseJSON.message);
+      }
+    });
+}
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1); // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
 }
 </script>
 

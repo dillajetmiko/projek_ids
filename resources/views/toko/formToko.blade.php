@@ -41,22 +41,28 @@
         </div>
         <div class="form-group">
           <label for="latitude">Latitude</label>
-          <input type="text" name="latitude" class="form-control">
+          <input type="text" name="latitude" class="form-control" id="lat" value="">
         </div>
         <div class="form-group">
           <label for="longitude">Longitude</label>
-          <input type="text" name="longitude" class="form-control">
+          <input type="text" name="longitude" class="form-control" id="lon" value="">
         </div>
         <div class="form-group">
           <label for="accuracy">Accuracy</label>
-          <input type="text" name="accuracy" class="form-control">
+          <input type="text" name="accuracy" class="form-control" id="acc" value="">
         </div>
         <div class="col-md-12 text-center">
             <br/>
+            
             <button type="submit" class="btn btn-success">Submit</button>
         </div>
       </div>
     </form>
+    <button class="btn btn-primary" onclick="getLocation()">Geolog</button>
+    <p id="demo"></p>
+    <!-- <p id="lat"></p>
+    <p id="lon"></p>
+    <p id="accuracy"></p> -->
   </div>
   <!-- /.card-body -->
   <div class="card-footer">
@@ -68,5 +74,24 @@
 @endsection
 
 @section("scripts")
+<script>
+var x = document.getElementById("demo")
+// var x = document.getElementById("lat");
+// var y = document.getElementById("lon");
+// var z = document.getElementById("accuracy");
 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  document.getElementById("lat").value = position.coords.latitude;
+  document.getElementById("lon").value = position.coords.longitude;
+  document.getElementById("acc").value = position.coords.accuracy;
+}
+</script>
 @endsection

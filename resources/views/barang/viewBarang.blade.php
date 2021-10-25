@@ -33,19 +33,30 @@
   </div>
   <div class="card-body">
     <div style="height: 70px;">
-      <a href="/generate-pdf">
+      <!-- <a href="/generate-pdf">
 				<button type="button" class="btn btn-secondary float-left" style="float: left;  margin: 5px"><i class="fas fa-file-download">  </i>  Cetak Barcode</button>
-      </a>
+      </a><br> -->
       <a href="/barang/formBarang">
         <button type="button" class="btn btn-info float-right" style="float: right; margin: 5px"><i class="fas fa-plus"></i>  Tambah Data Barang</button>
-      </a><br>
+      </a>
+
+      <form action="" method="">
+        <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
+        <label for="">kolom</label>
+        <input type="number" id="col" name="col" min="1" max="5" value="1">
+        <label for="">baris</label>
+        <input type="number" id="row" name="row" min="1" max="8" value="1">
+      </form>
+      <button id="generate" type="button" class="btn btn-secondary float-left" style="float: left;  margin: 5px"><i class="fas fa-file-download">  </i>  Cetak Barcode</button>
+      <!-- <b>Data submitted to the server:</b>
+      <p id="example-console"></p> -->
     </div>
     <div>
-    <form id="frm-example" action="/barang" method="POST">
-    <table id="example" class="display" cellspacing="0" width="100%">
-    <thead>
+      <form id="frm-example" action="/generate-pdf" method="POST">
+        <table id="example" class="display" cellspacing="0" width="100%">
+          <thead>
               <tr>
-                  <th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>
+                  <th><input name="select_all" value="" id="example-select-all" type="checkbox" /></th>
                   <th>ID</th>
                   <th>Nama</th>
                   <th>TimeStamp</th>
@@ -79,19 +90,12 @@
                   <th>Barcode</th>
               </tr>
           </tfoot>
-   
-</table>
-<hr>
+      
+        </table>
+        <!-- <hr>
+        <p><button>Submit</button></p> -->
+      </form>
 
-<p>Press <b>Submit</b> and check console for URL-encoded form data that would be submitted.</p>
-
-<p><button>Submit</button></p>
-
-<b>Data submitted to the server:</b><br>
-<pre id="example-console"></pre>
-
-
-</form>
     </div>
   </div>
   <!-- /.card-body -->
@@ -125,7 +129,7 @@ $(document).ready(function (){
          'orderable':false,
          'className': 'dt-body-center',
          'render': function (data, type, full, meta){
-             return '<input type="checkbox" name="id[]" value="' 
+             return '<input type="checkbox" name="check" value="' 
                 + $('<div/>').text(data).html() + '">';
          }
       }],
@@ -152,39 +156,99 @@ $(document).ready(function (){
          }
       }
    });
-    
-   $('#frm-example').on('submit', function(e){
+
+       //1-----------------------
+    // $("#generate").click(function(e){
+    //   var favorite = [];
+    //   $.ajax({
+    //       type:"GET",
+    //       url:"{{url('getCity')}}?prov_id="+provinceID,
+    //       success:function(res){        
+    //       if(res){
+    //         $("#city").empty();
+    //         $("#district").empty();
+    //         $("#subdistrict").empty();
+    //         $("#city").append('<option>Select City</option>');
+    //         $.each(res,function(key,value){
+    //           $("#city").append('<option value="'+key+'">'+value+'</option>');
+    //         });
+          
+    //       }else{
+    //         $("#city").empty();
+    //       }
+    //       }
+    //     });
+    // });
+        //asli-----------------------
+  //  $('#generate').on('click', function(e){
+  //     var favorite = [];
+  //     $.each($("input[name='check']:checked"), function(){
+  //         favorite.push($(this).val());
+  //     });
+  //     // alert("My favourite sports are: " + favorite.join(", "));
+  //     $('#example-console').text(favorite.join(","));
+  
+  //     e.preventDefault(); 
+  //  });
+
+       //3bisa---------------------------------
+   $('#generate').on('click', function(e){
       var favorite = [];
-      $.each($("input[type='checkbox']:checked"), function(){
+      var row =  Number(document.getElementById("row").value);
+      var col =  Number(document.getElementById("col").value);
+      $.each($("input[name='check']:checked"), function(){
           favorite.push($(this).val());
       });
+      parameter= "/"+ favorite.join()+"/"+col+"/"+row;
+      url= "{{url('cetakpdf')}}";
+      document.location.href=url+parameter;
+      // $.ajax({
+      //     type: "GET",
+      //     url: "{{route('generate')}}",
+      //     data: {id_barang : favorite}, 
+      //     // dataType: 'json',
+      //     success: function(data){
+      //         // alert("OK");
+      //         // alert(data);
+      //         console.log(data);
+      //         // alert("My favourite sports are: " +data);
+      //     }
+      // });
       // alert("My favourite sports are: " + favorite.join(", "));
-      $('#example-console').text(favorite.join(","));
-
-      e.preventDefault();
-
-      if(favorite){
-        $.ajax({
-          type:"GET",
-          url:"{{url('generate-pdf')}}?id_barang="+favorite,
-          // success:function(res){        
-          // if(res){
-          //   $("#district").empty();
-          //   $("#subdistrict").empty();
-          //   $("#district").append('<option>Select District</option>');
-          //   $.each(res,function(key,value){
-          //     $("#district").append('<option value="'+key+'">'+value+'</option>');
-          //   });
-          
-          // }else{
-          //   $("#district").empty();
-          // }
-          // }
-        });
-      }
-
+      // $('#example-console').text(favorite.join(","));
+  
+      e.preventDefault(); 
    });
 
+   //3------------------------------
+  //  $('#frm-example').on('submit', function(e){
+  //     var favorite = [];
+  //     $.each($("input[type='checkbox']:checked"), function(){
+  //         favorite.push($(this).val());
+  //     });
+  //     // alert("My favourite sports are: " + favorite.join(", "));
+  //     $('#generate').text(favorite.join(","));
+
+  //     $('#generate').click(function(){ 
+  //       var favorit = $(this).val();
+  //       if(favorit){
+  //         $.ajax({
+  //           type:"GET",
+  //           url:"{{url('generate-pdf')}}?id_barang="+favorit,
+  //           success:function(res){        
+  //           if(res){
+  //             $('#example-console').text(favorite.join(","));
+            
+  //           }
+  //           }
+  //         });
+  //       }  
+  //       });
+  
+  //     e.preventDefault(); 
+  //  });
+
+        //2-------------------------------------------
   //  $('#frm-example').on('submit', function(e){
   //     var form = this;
 

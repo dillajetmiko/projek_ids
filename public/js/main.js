@@ -52,6 +52,7 @@
             });
             scannedImg.src = res.imgData;
             scannedQR[txt] = res.code;
+            hasilscan(res.code);
         },
         getDevicesError: function(error) {
             var p, message = "Error detected with the following parameters:\n";

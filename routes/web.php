@@ -55,7 +55,9 @@ Route::get('/customer', [CustomerController::class, 'index']);
 Route::post('/simpan', [CustomerController::class, 'simpan'])->name('simpan');
 Route::post('/simpan2', [CustomerController::class, 'simpan2'])->name('simpan2');
 
-Route::get('generate-pdf', [PDFController::class, 'generatePDF'])->name('generate-pdf');;
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate');;
+Route::get('/cetakpdf/{id_barang}/{col}/{row}', [PDFController::class, 'generatePDF']);;
+Route::post('/generate2', [PDFController::class, 'generate'])->name('generate2');;
 
 Route::get('/barang', [BarangController::class, 'index']);
 Route::get('/barang/formBarang', [BarangController::class, 'formBarang'])->name('formBarang');
