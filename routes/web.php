@@ -54,6 +54,7 @@ Route::get('/getSubdistrict',[DropdownController::class, 'getSubdistrict'])->nam
 Route::get('/customer', [CustomerController::class, 'index']);
 Route::post('/simpan', [CustomerController::class, 'simpan'])->name('simpan');
 Route::post('/simpan2', [CustomerController::class, 'simpan2'])->name('simpan2');
+Route::post('/importexcel', [CustomerController::class, 'importexcel'])->name('importexcel');
 
 Route::get('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate');;
 Route::get('/cetakpdf/{id_barang}/{col}/{row}', [PDFController::class, 'generatePDF']);;

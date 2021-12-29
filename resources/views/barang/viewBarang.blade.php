@@ -45,7 +45,7 @@
         <label for="">kolom</label>
         <input type="number" id="col" name="col" min="1" max="5" value="1">
         <label for="">baris</label>
-        <input type="number" id="row" name="row" min="1" max="8" value="1">
+        <input type="number" id="row" name="row" min="1" max="9" value="1">
       </form>
       <button id="generate" type="button" class="btn btn-secondary float-left" style="float: left;  margin: 5px"><i class="fas fa-file-download">  </i>  Cetak Barcode</button>
       <!-- <b>Data submitted to the server:</b>

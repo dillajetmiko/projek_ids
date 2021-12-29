@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Customer;
+use App\Imports\CustomerImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
@@ -58,4 +61,27 @@ class CustomerController extends Controller
 
         return redirect('/dropdown2');
     }
+
+    public function importexcel(Request $request)
+    {
+        //validasi
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        //menangkap file excel
+        $file = $request->file('file');
+
+        //upload folder
+        $nama_file = rand().$file->getClientOriginalName();
+        $file->move('dataCustomer', $nama_file);
+
+        //import data
+        Excel::import(new CustomerImport, public_path('/dataCustomer/'.$nama_file));
+
+        // Session::flash('sukses', 'Data customer berhasil di Import');
+        return \redirect()->back();
+    }
+
+
 }

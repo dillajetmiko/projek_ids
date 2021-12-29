@@ -38,7 +38,7 @@ class PDFController extends Controller
         // return response()->json($dataa, 200);
 
         $customPaper = array(0,0,611.7,469.47);
-        return PDF::loadView('myPDF', $data)->setPaper($customPaper)->stream('barcode.pdf');
+        return PDF::loadView('myPDF', $data)->setPaper('a5', 'landscape')->stream('barcode.pdf');
     }
 
     public function generate(Request $request)

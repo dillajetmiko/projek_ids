@@ -145,6 +145,18 @@
         </div>
         <div class="card-body">
           <!-- <button class="btn btn-primary" onclick="getLocation()">Try It</button> -->
+          <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input type="text" name="latitude" class="form-control" id="lat" disabled>
+          </div>
+          <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input type="text" name="longitude" class="form-control" id="lon" disabled>
+          </div>
+          <div class="form-group">
+            <label for="accuracy">Accuracy</label>
+            <input type="text" name="accuracy" class="form-control" id="acc" disabled>
+          </div>
           <p id="demo"></p>
           <p id="demo2"></p>
         </div>
@@ -230,14 +242,15 @@ function getLocation(data) {
   if (navigator.geolocation) {
     // navigator.geolocation.getCurrentPosition(showPosition);
     navigator.geolocation.getCurrentPosition(position => {
-      x.innerHTML = "Latitude: " + position.coords.latitude + 
-      "<br>Longitude: " + position.coords.longitude +
-      "<br>Accuracy: " + position.coords.accuracy;
+      document.getElementById("lat").value = position.coords.latitude;
+      document.getElementById("lon").value = position.coords.longitude;
+      document.getElementById("acc").value = position.coords.accuracy;
       d = getDistanceFromLatLonInKm(data.latitude,data.longitude,position.coords.latitude,position.coords.longitude);
       // d = 1749.649374864356;
       let rataAcc = (data.accuracy + position.coords.accuracy)/2;
       if(d <= rataAcc){
         y.innerHTML = "Jarak antara titik awal dan titik kunjungan : " + d + "<br>Anda telah melakukan kunjungan";
+        // alert("Anda telah melakukan kunjungan");
       }else{
         alert("Anda tidak berada dalam toko\nJarak : " + d + "\nRata-rata Accuracy : " + rataAcc);
       }
