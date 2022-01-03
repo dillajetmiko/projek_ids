@@ -17,7 +17,7 @@
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Title</h3>
+    <h3 class="card-title"><strong>My Google Info</strong></h3>
 
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -27,11 +27,14 @@
     </div>
   </div>
   <div class="card-body">
-    Start creating your amazing application!
+    {{ Auth::user()->provider_id }} <br>
+    {{ Auth::user()->name }} <br>
+    <img src="{{ Auth::user()->avatar }}"alt="{{ Auth::user()->name }}"><br>
+    {{ Auth::user()->email }} <br>
   </div>
   <!-- /.card-body -->
   <div class="card-footer">
-    Footer
+    
   </div>
   <!-- /.card-footer-->
 </div>

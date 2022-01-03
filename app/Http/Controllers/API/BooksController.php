@@ -15,7 +15,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        return Book::all();
     }
 
     /**
@@ -77,7 +77,17 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->name;
+        $author = $request->author;
+
+        $book = Book::find($id);
+        $book->name = $name;
+        $book->author = $author;
+        $book->save();
+
+        return response()->json([
+            "message" => "Book record updated"
+        ]);
     }
 
     /**
@@ -88,6 +98,11 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::find($id);
+        $book->delete();
+
+        return response()->json([
+            "message" => "Book record deleted"
+        ]);
     }
 }

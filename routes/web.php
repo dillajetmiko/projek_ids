@@ -25,16 +25,16 @@ Route::get('/', function () {
     );
 
     return view('home',$data);
-});
+})->middleware('auth');
 
-Route::get('/home', function () {
-    $data = array(
-        'menu' => 'Home',
-        'submenu' => '',
-    );
+// Route::get('/home', function () {
+//     $data = array(
+//         'menu' => 'Home',
+//         'submenu' => '',
+//     );
 
-    return view('home',$data);
-});
+//     return view('home',$data);
+// });
 
 Route::get('/webscan', function () {
     $data = array(
@@ -70,3 +70,16 @@ Route::get('/toko/formToko', [TokoController::class, 'formToko'])->name('formTok
 Route::post('/toko/tambahToko', [TokoController::class, 'tambahToko'])->name('tambahToko');
 Route::get('/scannertoko', [TokoController::class, 'scanner'])->name('scannertoko');
 Route::get('/getAllFields', [TokoController::class, 'getAllFields'])->name('getAllFields');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Google Login
+Route::get('/login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
+
+Route::get('/login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+
+Route::get('/logout',function(){
+    Auth::logout();
+    return  redirect ('/login');
+})->name('logout');

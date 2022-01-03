@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Customer;
 use App\Imports\CustomerImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -77,9 +78,16 @@ class CustomerController extends Controller
         $file->move('dataCustomer', $nama_file);
 
         //import data
-        Excel::import(new CustomerImport, public_path('/dataCustomer/'.$nama_file));
+        $import = new CustomerImport;
+        $import->import(public_path('/dataCustomer/'.$nama_file));
+        // $import = Excel::import(new CustomerImport, public_path('/dataCustomer/'.$nama_file));
 
-        // Session::flash('sukses', 'Data customer berhasil di Import');
+        Session::flash('sukses', 'Data customer berhasil di Import');
+
+        if($import->failures()->isNotEmpty()){
+            return back()->withFailures($import->failures());
+        } 
+        
         return \redirect()->back();
     }
 
