@@ -6,6 +6,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\TokoController;
+use App\Http\Controllers\ScoreboardController;
+use App\Http\Controllers\UsersImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,3 +85,20 @@ Route::get('/logout',function(){
     Auth::logout();
     return  redirect ('/login');
 })->name('logout');
+
+// Scoreboard
+Route::get('/scoreboard', [ScoreboardController::class, 'scoreboard']);
+Route::get('/scoreboard-controller', [ScoreboardController::class, 'index']);
+Route::post('/scoreboard-controller/update', [ScoreboardController::class, 'store'])->name('scoreboard.post');
+// Route::post('/skor/update', [ScoreboardController::class, 'store'])->name('scoreboard.post');
+Route::get('/messages', [ScoreboardController::class, 'message']);
+
+
+// Route::post('ajaxRequest', [App\Http\Controllers\ScoreboardController::class, 'ajaxRequestPost'])->name('ajaxRequest.post');
+
+Route::get('ajaxRequest', [ScoreboardController::class, 'ajaxRequest']);
+Route::post('ajaxRequest', [ScoreboardController::class, 'ajaxRequestPost'])->name('ajaxRequest.post');
+
+Route::get('/cust', [UsersImportController::class, 'index']);
+Route::get('/excel', [UsersImportController::class, 'create']);
+Route::post('/excel-import', [UsersImportController::class, 'store']);

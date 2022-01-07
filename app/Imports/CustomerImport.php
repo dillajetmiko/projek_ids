@@ -2,9 +2,8 @@
 
 namespace App\Imports;
 
-use App\Models\Customer;
+use App\Models\cust;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -24,11 +23,11 @@ class CustomerImport implements ToModel, WithHeadingRow, SkipsOnError, WithBatch
     */
     public function model(array $row)
     {
-        return new Customer([
-            'id' => @$row['id_customer'],
-            'nama' => @$row['nama'],
-            'alamat' => @$row['alamat'],
-            'subdis_id' => @$row['kodepos']
+        return new cust([
+        'id_customer' => $row['id_customer'],
+        'nama' => $row['nama'] ?? $row['nama_lengkap'],
+        'alamat' => $row['alamat'],
+        'kodepos' => $row['kodepos'],
         ]);
     }
     public function batchSize(): int
@@ -37,8 +36,8 @@ class CustomerImport implements ToModel, WithHeadingRow, SkipsOnError, WithBatch
     }
     public function rules(): array
     {
-        return [
-            '*.id' => ['unique:customer,id']
-        ];
+    return [
+        '*.id_customer' => ['unique:cust,id_customer']
+    ];
     }
 }
