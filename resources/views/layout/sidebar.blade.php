@@ -145,42 +145,69 @@
           </p>
         </a>
       </li>
-      <li class="nav-item">
-        @if($menu == 'controller')
-        <a href="/scoreboard-controller" class="nav-link active">
-        @else
-        <a href="/scoreboard-controller" class="nav-link">
-        @endif
-          <i class="nav-icon fas fa-th"></i>
-          <p>
-            Controller
-          </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        @if($menu == 'cust')
-        <a href="/cust" class="nav-link active">
-        @else
-        <a href="/cust" class="nav-link">
-        @endif
-          <i class="nav-icon fas fa-th"></i>
-          <p>
-            Cust
-          </p>
-        </a>
-      </li>
+      
       <li class="nav-item">
         @if($menu == 'menuexcel')
         <a href="/excel" class="nav-link active">
         @else
         <a href="/excel" class="nav-link">
         @endif
-          <i class="nav-icon fas fa-th"></i>
+          <i class="nav-icon fas fa-file-excel"></i>
           <p>
             Excels
           </p>
         </a>
       </li>
+      <!-- <li class="nav-item">
+        @if($menu == 'cust')
+        <a href="/cust" class="nav-link active">
+        @else
+        <a href="/cust" class="nav-link">
+        @endif
+          <i class="nav-icon fas fa-user"></i>
+          <p>
+            Cust
+          </p>
+        </a>
+      </li> -->
+
+      <li class="nav-item">
+        @if($menu == 'controller')
+        <a href="/scoreboard-controller" class="nav-link active">
+        @else
+        <a href="/scoreboard-controller" class="nav-link">
+        @endif
+          <i class="nav-icon fas fa-keyboard"></i>
+          <p>
+            Controller
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        @if($menu == 'scoreboard')
+        <a href="/scoreboard" class="nav-link active">
+        @else
+        <a href="/scoreboard" class="nav-link">
+        @endif
+          <i class="nav-icon fas fa-table"></i>
+          <p>
+            Scoreboard
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        @if($menu == 'book')
+        <a href="/book" class="nav-link active">
+        @else
+        <a href="/book" class="nav-link">
+        @endif
+          <i class="nav-icon fas fa-book"></i>
+          <p>
+            Book
+          </p>
+        </a>
+      </li>
+      
     
     </ul>
   </nav>

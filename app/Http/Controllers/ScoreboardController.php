@@ -10,7 +10,7 @@ class ScoreboardController extends Controller
     public function scoreboard()
     {
         $data = array(
-            'menu' => 'controller',
+            'menu' => 'scoreboard',
             'submenu' => '',
         );
         return view('scoreboard.scoreboard', $data);

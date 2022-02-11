@@ -2,7 +2,7 @@
 
 @section("page_title","IDS")
 
-@section("title","Home")
+@section("title","Scoreboard Controller")
 
 @section("custom_css")
 
@@ -10,14 +10,14 @@
 
 @section("breadcrumb")
 <li class="breadcrumb-item"><a href="#">Home</a></li>
-<li class="breadcrumb-item active">Home</li>
+<li class="breadcrumb-item active">Controller</li>
 @endsection
 
 @section("content")
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-		<h3 class="card-title"><strong>My Google Info</strong></h3>
+		<!-- <h3 class="card-title"><strong>Controller Scoreboard</strong></h3> -->
 
 		<div class="card-tools">
 			<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -115,7 +115,7 @@
 								</button>
 								<hr>
 
-								<h6>Sound</h6>
+								<!-- <h6>Sound</h6>
 								<input type="hidden" value="0" id="sound_status">
 								<button type="button" class="btn btn-outline-dark sound1">
 									Sound 1
@@ -125,7 +125,7 @@
 								</button>
 								<button type="button" class="btn btn-outline-dark sound3">
 									Sound 3
-								</button>
+								</button> -->
 							</td>
 
 							<td align="center">

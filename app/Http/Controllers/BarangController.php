@@ -15,6 +15,7 @@ class BarangController extends Controller
             'barang' => $barang,
             'submenu' => '',
         );
+        // dd($data);
 
         return view('barang/viewBarang',$data); 
     }

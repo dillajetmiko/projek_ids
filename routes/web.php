@@ -8,6 +8,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\ScoreboardController;
 use App\Http\Controllers\UsersImportController;
+use App\Http\Controllers\API\BooksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,3 +103,10 @@ Route::post('ajaxRequest', [ScoreboardController::class, 'ajaxRequestPost'])->na
 Route::get('/cust', [UsersImportController::class, 'index']);
 Route::get('/excel', [UsersImportController::class, 'create']);
 Route::post('/excel-import', [UsersImportController::class, 'store']);
+
+Route::get('/book', [BooksController::class, 'book']);
+Route::get('/book/insertBook', [BooksController::class, 'create']);
+Route::get('/book/editBook/{id}', [BooksController::class, 'edit']);
+Route::post('/book/tambahBook', [BooksController::class, 'tambahBook']);
+Route::put('/book/updateBook/{id}', [BooksController::class, 'updateBook']);
+Route::delete('/book/hapus/{id}', [BooksController::class, 'hapus']);

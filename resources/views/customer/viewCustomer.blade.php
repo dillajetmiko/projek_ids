@@ -67,9 +67,9 @@
     @endif
 
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importExcel">
+      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importExcel">
         Import File
-      </button>
+      </button> -->
       <table id="example1" class="table table-bordered table-striped">
           <thead>
               <tr>

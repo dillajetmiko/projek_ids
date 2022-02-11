@@ -2,7 +2,7 @@
 
 @section("page_title","IDS")
 
-@section("title","Home")
+@section("title","Scoreboard")
 
 @section("custom_css")
 
@@ -10,14 +10,14 @@
 
 @section("breadcrumb")
 <li class="breadcrumb-item"><a href="#">Home</a></li>
-<li class="breadcrumb-item active">Home</li>
+<li class="breadcrumb-item active">Scoreboard</li>
 @endsection
 
 @section("content")
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-		<h3 class="card-title"><strong>My Google Info</strong></h3>
+		<!-- <h3 class="card-title"><strong>My Google Info</strong></h3> -->
 
 		<div class="card-tools">
 			<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -29,7 +29,7 @@
   <div class="card-body">
 		<div class="col d-flex align-items-center justify-content-center">
 			<div class="table-responsive col-md-8">
-			<center><h1 style="color: black">FUTSAL</h1></center>
+			<center><h1 style="color: black">BASKETBALL</h1></center>
 				<table style="border:3px solid black" class="table table-active text-center table-borderless">
 					<thead>
 
@@ -110,7 +110,7 @@
 @section("scripts")
 <script>
 // 20 minutes
-var time_in_minutes = 10;
+var time_in_minutes = 20;
 var current_time = Date.parse(new Date());
 var deadline = new Date(current_time + time_in_minutes*60*1000);
 

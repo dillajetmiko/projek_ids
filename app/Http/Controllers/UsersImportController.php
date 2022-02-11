@@ -24,9 +24,11 @@ class UsersImportController extends Controller
     public function create()
     {
         // $menu = 'menuexcel';
+        $cust = DB::table('cust')->get();
         $data = array(
             'menu' => 'menuexcel',
             'submenu' => '',
+            'cust'=>$cust
         );
         return view('pages.excel_view',$data);
     }
